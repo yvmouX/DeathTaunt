@@ -1,0 +1,52 @@
+version: 1.0.1
+# 是否启用调试模式
+logger: false
+# 自定义信息前缀，默认为空。%killerPlayer% 代表杀手玩家, "%deathPlayer% 代表死者玩家。
+# 为空时默认关闭
+custom_message_prefix: ""
+# 艾特玩家
+at:
+  enable: true
+  sound: entity.experience_orb.pickup
+# 加载插件时检查配置文件
+config_check:
+  enable: true
+  strict_mode: true # 严格模式，如果配置文件存在错误，则插件将无法启动
+Message:
+  '1':
+    name: "名称1"
+    category: "默认分类1"
+    change: 0.1
+    mode: "public" # 公共模式，所有人都可以看见信息。该模式下默认显示玩家聊天前缀，使用custom_message_prefix会被覆盖
+    sound: "entity.experience_orb.pickup"
+    sound_mode: toDead # 只有死亡的一方可以听到音效
+    list:
+      - "&a弱鸡！"
+      - "&d死亡回放：%killerPlayer% → 你！"
+      - "&c你死了！"
+      - "&b轻松碾压你！"
+      - "&e不收徒！"
+  '2':
+    name: "名称2"
+    category: "默认分类2"
+    change: 0.1
+    mode: "private" # 私人模式，只有双方可以看见信息。该模式下不会显示玩家聊天前缀，需自定义
+    sound: "entity.experience_orb.pickup"
+    sound_mode: toKiller # 只有杀手的一方可以听到音效
+    list:
+      - "&a弱鸡！"
+      - "&d死亡回放：%killerPlayer% → 你！"
+      - "&c你死了！"
+      - "&b轻松碾压你！"
+      - "&e不收徒！"
+  '3':
+    name: "名称3"
+    category: "默认分类3"
+    change: 0.1
+    mode: "toDead" # 死者模式，只有死亡的一方可以看见信息。该模式下不会显示玩家聊天前缀，需自定义
+    sound: "entity.experience_orb.pickup"
+    sound_mode: all # 双方都可以听到音效
+    list:
+      - "&e%killerPlayer%的击杀让你看起来像个新手！"
+      - "&e需要教学吗？问问%killerPlayer%怎么玩吧！"
+      - "&d%killerPlayer%刚刚给你上了难忘的一课！"

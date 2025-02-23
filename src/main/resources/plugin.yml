@@ -1,0 +1,11 @@
+name: DeathTaunt
+version: '${version}'
+main: cn.yvmou.deathtaunt.DeathTaunt
+api-version: '1.13'
+prefix: DeathTaunt
+authors: [yvmoux]
+description: 死亡嘲讽插件
+website: blog.yvmou.cn
+commands:
+  deathtaunt:
+    aliases: [ deathtaunt, dt ]
