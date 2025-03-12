@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+}
+
+tasks {
+    shadowJar {
+        relocate 'com.cryptomorin.xseries', 'my.plugin.utils'
+    }
+}
+
+group = 'cn.yvmou'
+version = '1.0.1'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "spigotmc-repo"
+        url = "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"
+    }
+    maven {
+        name = "sonatype"
+        url = "https://oss.sonatype.org/content/groups/public/"
+    }
+    maven {
+        name = 'NeuralNexus'
+        url = 'https://maven.neuralnexus.dev/releases'
+    }
+}
+
+dependencies {
+    compileOnly "org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT"
+    implementation("com.github.cryptomorin:XSeries:13.0.0")
+    implementation "dev.neuralnexus:taterlib-api:1.1.0"
+}
+
+def targetJavaVersion = 17
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release.set(targetJavaVersion)
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+
+// 构建后将文件复制到服务器插件文件夹
+tasks.register('copy', Copy) {
+    from "build/libs" // 源文件夹, 在这里是构建产物的文件夹=
+    into 'E:/_SERVER/paper1.20.1/plugins' // 目标文件夹, 在这里是调试服务端的插件文件夹
+    include "DeathTaunt-${version}-all.jar"  // 可选：只复制特定类型的文件,支持正则表达式 在这里只规定该名称的文件可以被复制到目标文件夹 }
+}
+tasks.named('copy').configure {
+    dependsOn(build) // 确保在构建后执行
+}
+tasks.named('copy').configure {
+    dependsOn(tasks.shadowJar) // 确保 shadowJar 在 copy 任务之前执行
+}

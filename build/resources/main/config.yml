@@ -1,0 +1,113 @@
+version: 1.0.1
+# 是否启用调试模式
+logger: false
+# 自定义信息前缀，默认为空。%killerPlayer% 代表杀手玩家, "%deathPlayer% 代表死者玩家。
+# 为空时默认关闭
+custom_message_prefix: ""
+# 艾特玩家
+at:
+  enable: true
+  sound: entity.experience_orb.pickup
+# 加载插件时检查配置文件
+config_check:
+  enable: true
+  strict_mode: true # 严格模式，如果配置文件存在错误，则插件将无法启动
+Message:
+  '1':
+    name: "名称1"
+    category: "默认分类1"
+    change: 0.1
+    mode: "public" # 公共模式，所有人都可以看见信息。该模式下默认显示玩家聊天前缀，使用custom_message_prefix会被覆盖
+    sound: "entity.experience_orb.pickup"
+    sound_mode: toDead # 只有死亡的一方可以听到音效
+    list:
+      - "&a弱鸡！"
+      - "&d死亡回放：%killerPlayer% → 你！"
+      - "&c你死了！"
+      - "&b轻松碾压你！"
+      - "&e不收徒！"
+  '2':
+    name: "名称2"
+    category: "默认分类2"
+    change: 0.1
+    mode: "private" # 私人模式，只有双方可以看见信息。该模式下不会显示玩家聊天前缀，需自定义
+    sound: "entity.experience_orb.pickup"
+    sound_mode: toKiller # 只有杀手的一方可以听到音效
+    list:
+      - "&a弱鸡！"
+      - "&d死亡回放：%killerPlayer% → 你！"
+      - "&c你死了！"
+      - "&b轻松碾压你！"
+      - "&e不收徒！"
+  '3':
+    name: "名称3"
+    category: "默认分类3"
+    change: 0.1
+    mode: "toDead" # 死者模式，只有死亡的一方可以看见信息。该模式下不会显示玩家聊天前缀，需自定义
+    sound: "entity.experience_orb.pickup"
+    sound_mode: all # 双方都可以听到音效
+    list:
+      - "&e%killerPlayer%的击杀让你看起来像个新手！"
+      - "&e需要教学吗？问问%killerPlayer%怎么玩吧！"
+      - "&d%killerPlayer%刚刚给你上了难忘的一课！"
+# 以下内容为AI生成
+  '4':
+    name: "技术压制"
+    category: "竞技嘲讽"
+    change: 0.1
+    mode: "public"
+    sound: "entity.arrow.hit_player"
+    sound_mode: toDead
+    list:
+      - "&6%killerPlayer%的压枪教学收费观看！"
+      - "&c%killerPlayer%的枪线画出了你的墓碑轮廓！"
+      - "&e这波操作建议录屏反复学习！"
+      - "&b%killerPlayer%的预判已通过专业认证！"
+  '5':
+    name: "幽默调侃"
+    category: "趣味互动"
+    change: 0.15
+    mode: "private"
+    sound: "block.note_block.bell"
+    sound_mode: all
+    list:
+      - "&d%killerPlayer%为你点了首《凉凉》！"
+      - "&a你的盒饭已由%killerPlayer%赞助！"
+      - "&e这波操作建议申报人类迷惑行为"
+      - "&b%killerPlayer%正在申请击杀专利！"
+  '6':
+    name: "灵魂质问"
+    category: "心理打击"
+    change: 0.2
+    mode: "toDead"
+    sound: "entity.ender_dragon.flap"
+    sound_mode: toKiller
+    list:
+      - "&8你听见队友心碎的声音了吗？"
+      - "&4%killerPlayer%的KD计数器+1！"
+      - "&6你的死亡回放已加入%killerPlayer%精彩集锦"
+      - "&e需要代练服务请私聊%killerPlayer%！"
+  '7':
+    name: "电竞梗王"
+    category: "流行文化"
+    change: 0.1
+    mode: "public"
+    sound: "entity.villager.celebrate"
+    sound_mode: all
+    list:
+      - "&c这波啊，这波是肉蛋充饥！"
+      - "&6天神下凡一锤四！"
+      - "&e你们四个被我一个人包围了！"
+      - "&b重铸××荣光，我辈义不容辞！"
+  '8':
+    name: "哲学暴击"
+    category: "深度嘲讽"
+    change: 0.05
+    mode: "toDead"
+    sound: "block.beacon.power_select"
+    sound_mode: toDead
+    list:
+      - "&8你的操作诠释了薛定谔的枪法"
+      - "&7你证明了人被杀就会死"
+      - "&f你的意识在第五层，而%killerPlayer%在大气层"
+      - "&b你的走位验证了墨菲定律"
