@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+//if (getConfig().getString("database.host") == null) {
+//getLogger().warning("数据库地址缺失，使用默认值！");
+//getConfig().set("database.host", "localhost");
+//saveConfig();
+//}
 public class CheckConfigTools{
     private static DeathTaunt pl;
 

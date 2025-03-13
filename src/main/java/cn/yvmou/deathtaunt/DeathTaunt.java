@@ -6,13 +6,11 @@ import cn.yvmou.deathtaunt.ui.MainUi;
 import cn.yvmou.deathtaunt.utils.ConfigUtils;
 import cn.yvmou.deathtaunt.utils.MessageUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
 
 public final class DeathTaunt extends JavaPlugin {
-
     public String getVersion() {
         return "1.0.1";
     }

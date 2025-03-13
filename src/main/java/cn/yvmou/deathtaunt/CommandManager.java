@@ -17,8 +17,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     private DeathTaunt pl;
     private final Map<String, CommandExecutor> commands = new HashMap<>();
 
-    public CommandManager() {
-    }
 
     public CommandManager(DeathTaunt deathTaunt) {
         pl = deathTaunt;

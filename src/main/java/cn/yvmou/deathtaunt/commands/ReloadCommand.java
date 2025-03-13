@@ -1,7 +1,6 @@
 package cn.yvmou.deathtaunt.commands;
 
 import cn.yvmou.deathtaunt.DeathTaunt;
-import cn.yvmou.deathtaunt.tools.CheckConfigTools;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
