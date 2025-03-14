@@ -1,6 +1,5 @@
 package cn.yvmou.deathtaunt.utils;
 
-import cn.yvmou.deathtaunt.DeathTaunt;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -8,25 +7,22 @@ import org.bukkit.configuration.file.FileConfiguration;
 import java.util.*;
 
 public class ConfigUtils {
-
-    private static FileConfiguration config;
-
     private ConfigUtils() {
         throw new UnsupportedOperationException("无法实例化 ConfigUtils");
     }
 
+    private static FileConfiguration config;
+
     /**
      * 初始化配置工具类，必须在插件加载时调用
-     *
-     * @param deathTaunt        DeathTaunt 插件实例
+     * @param config FileConfiguration 对象
      */
-    public static void init(DeathTaunt deathTaunt) {
-        if (deathTaunt == null) {
-            throw new IllegalArgumentException("初始化参数不能为 null");
+    public static void init(FileConfiguration config) {
+        if (config == null) {
+            throw new IllegalArgumentException("配置不能为 null");
         }
-        config = deathTaunt.getConfig();
+        ConfigUtils.config = config;
     }
-
 
     /**
      * 检查固定键是否存在
@@ -42,7 +38,7 @@ public class ConfigUtils {
 
         boolean exists = config.isSet(path);
         if (!exists && errorMessage) {
-            MessageUtils.sendAnsiColorMessage(ChatColor.RED, "该键不存在或没有赋值: " + path);
+            MessageUtils.resetAnsiColorMessage(ChatColor.RED, "该键不存在或没有赋值: " + path);
         }
         return exists;
     }

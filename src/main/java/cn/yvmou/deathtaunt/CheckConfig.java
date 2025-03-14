@@ -1,45 +1,29 @@
-package cn.yvmou.deathtaunt.tools;
+package cn.yvmou.deathtaunt;
 
-import cn.yvmou.deathtaunt.DeathTaunt;
 import cn.yvmou.deathtaunt.utils.ConfigUtils;
 import cn.yvmou.deathtaunt.utils.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-//if (getConfig().getString("database.host") == null) {
-//getLogger().warning("数据库地址缺失，使用默认值！");
-//getConfig().set("database.host", "localhost");
-//saveConfig();
-//}
-public class CheckConfigTools{
-    private static DeathTaunt pl;
 
-    private CheckConfigTools() {
-        throw new UnsupportedOperationException("无法实例化 CheckConfigTools");
+public class CheckConfig {
+
+    private CheckConfig() {
+        throw new AssertionError("无法实例化 CheckConfig");
     }
 
+//    public static void checkConfig2(DeathTaunt pl, String path, String Default, String error) {
+//        if (pl.getConfig().getString(path) == null) {
+//            pl.getConfig().set(path, Default);
+//            pl.getLogger().warning(error);
+//            pl.saveConfig();
+//        }
+//    }
 
-    /**
-     * 初始化配置工具类，必须在插件加载时调用
-     *
-     * @param deathTaunt DeathTaunt 插件实例
-     */
-    public static void init(DeathTaunt deathTaunt) {
-        if (deathTaunt == null) {
-            throw new IllegalArgumentException("初始化参数不能为 null");
-        }
-        pl = deathTaunt;
-    }
-
-    /**
-     * 检测配置文件完整性
-     */
-    public static void checkConfig() {
+    public static void checkConfig(DeathTaunt pl) {
 
         // 严格检测模式检查
         boolean strictMode = pl.getConfig().getBoolean("config_check.strict_mode", true);
@@ -68,7 +52,7 @@ public class CheckConfigTools{
 
         if (isExist) {
             // 检测版本
-            if (!Objects.equals(pl.getConfig().getString("version"), pl.getVersion())) {
+            if (!Objects.equals(pl.getConfig().getString("version"), PluginInfo.getVersion())) {
                 hasVersionErrors = true;
             }
 

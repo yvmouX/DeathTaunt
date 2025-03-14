@@ -8,7 +8,7 @@ custom_message_prefix: ""
 at:
   enable: true
   sound: entity.experience_orb.pickup
-# 加载插件时检查配置文件
+# 加载插件时检查配置文件（重载无效）
 config_check:
   enable: true
   strict_mode: true # 严格模式，如果配置文件存在错误，则插件将无法启动

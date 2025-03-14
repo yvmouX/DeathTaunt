@@ -1,29 +1,24 @@
 package cn.yvmou.deathtaunt.utils;
 
-import cn.yvmou.deathtaunt.DeathTaunt;
 import org.bukkit.ChatColor;
 
 import java.util.logging.Logger;
 
 
 public class MessageUtils {
+    private MessageUtils() {throw new AssertionError("无法实例化 MessageUtils");}
 
     private static Logger logger;
 
-    private MessageUtils() {
-        throw new UnsupportedOperationException("无法实例化 MessageUtils");
-    }
-
     /**
      * 初始化配置工具类，必须在插件加载时调用
-     *
-     * @param main        DeathTaunt 插件实例
+     * @param logger Logger 对象
      */
-    public static void init(DeathTaunt main) {
-        if (main == null) {
+    public static void init(Logger logger) {
+        if (logger == null) {
             throw new IllegalArgumentException("初始化参数不能为 null");
         }
-        logger = main.getLogger();
+        MessageUtils.logger = logger;
     }
 
 

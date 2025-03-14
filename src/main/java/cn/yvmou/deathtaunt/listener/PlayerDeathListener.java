@@ -15,16 +15,14 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerDeathListener implements Listener {
-    private DeathTaunt pl;
+    private final DeathTaunt pl;
 
-    private boolean isLogger;
+    private final boolean isLogger;
     //private boolean isSendKillChat = false;
     private final Map<UUID, Boolean> isSendKillChat = new ConcurrentHashMap<>(); // 默认应为false
-    private String customMessagePrefix;
+    private final String customMessagePrefix;
     private String finallyKey; // 最终随机到的
 
-    public PlayerDeathListener() {
-    }
 
     public PlayerDeathListener(DeathTaunt deathTaunt) {
         pl = deathTaunt;
