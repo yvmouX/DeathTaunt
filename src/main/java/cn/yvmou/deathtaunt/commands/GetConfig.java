@@ -13,6 +13,9 @@ public class GetConfig {
     // 存储所有的分类
     private Set<String> allCategoryList = new HashSet<>(); // 所有的分类
 
+    // 存储分类-自定义key 映射关系
+    private Map<String, String> allCategoryKey = new HashMap<>();
+
     // 存储分类-属性键值 映射关系
     private Map<String, String> allName = new HashMap<>();
     private Map<String, String> allChange = new HashMap<>();
@@ -34,12 +37,13 @@ public class GetConfig {
                     }
                     case "list" -> {
                         List<String> listMsg = pl.getConfig().getStringList("Message." + key + "." + key2);
-                        allMessage.put(key, listMsg);
+                        allMessage.put(key2, listMsg);
                     }
                 }
             }
             String nowCategory = allVault.get("category");
             allCategoryList.add(nowCategory);
+            allCategoryKey.put(nowCategory, key);
             allName.put(nowCategory, allVault.get("name"));
             allChange.put(nowCategory, allVault.get("change"));
             allMode.put(nowCategory, allVault.get("mode"));
@@ -51,6 +55,10 @@ public class GetConfig {
 
     public Set<String> getAllCategoryList() {
         return allCategoryList;
+    }
+
+    public Map<String, String> getAllCategoryKey() {
+        return allCategoryKey;
     }
 
     public Map<String, String> getAllName() {

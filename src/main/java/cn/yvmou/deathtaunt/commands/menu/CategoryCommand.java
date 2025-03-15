@@ -1,6 +1,7 @@
 package cn.yvmou.deathtaunt.commands.menu;
 
 import cn.yvmou.deathtaunt.DeathTaunt;
+import cn.yvmou.deathtaunt.PluginInfo;
 import cn.yvmou.deathtaunt.commands.GetConfig;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -10,21 +11,20 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class CategoryCommand implements CommandExecutor {
     private final DeathTaunt pl;
     public CategoryCommand(DeathTaunt pl) {
         this.pl = pl;
     }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         GetConfig getConfig = new GetConfig(pl);
-
         getConfig.getAll();
         Set<String> allCategoryList = getConfig.getAllCategoryList();
         Map<String, String> allName = getConfig.getAllName();
@@ -34,17 +34,26 @@ public class CategoryCommand implements CommandExecutor {
         Map<String, String> allSoundMode = getConfig.getAllSoundMode();
         Map<String, List<String>> allListMessage = getConfig.getAllListMessage();
 
+        String nowCategory;
 
-
-        for (String category : allCategoryList) {
-            if (args.length == 2) {
-                if (args[0].equalsIgnoreCase("category") && args[1].equalsIgnoreCase(category)) {
-                    openCategoryMenu(sender, category, allName, allChange, allMode, allSound, allSoundMode, allListMessage);
-                    System.out.println("0");
-                    return true;
-                } else System.out.println("1");
-            } else System.out.println("2");
+        if (args.length != 2 || !args[0].equalsIgnoreCase("category")) {
+            sender.sendMessage(PluginInfo.getPluginPrefix() + ChatColor.RED + "请输入正确的参数！");
+            return false;
         }
+
+        if (allCategoryList.contains(args[1])) {
+            nowCategory = args[1];
+        } else {
+            sender.sendMessage(PluginInfo.getPluginPrefix() + ChatColor.RED + "请输入正确的参数！");
+            return false;
+        }
+
+        if (args[1].equalsIgnoreCase(nowCategory)) {
+            openCategoryMenu(sender, args[1], allName, allChange, allMode, allSound, allSoundMode, allListMessage);
+            System.out.println("成功");
+            return true;
+        }
+
         return false;
     }
 
@@ -62,7 +71,7 @@ public class CategoryCommand implements CommandExecutor {
                 allName.get(category),
                 "",
                 "",
-                "/deathtaunt list set " + category + " name",
+                "/deathtaunt modify " + category + " name",
                 "修改name",
                 false
 
@@ -74,7 +83,7 @@ public class CategoryCommand implements CommandExecutor {
                 allChange.get(category),
                 "",
                 "",
-                "/deathtaunt list category " + category + " set change",
+                "/deathtaunt modify " + category + " set change",
                 "修改权重",
                 false
 
@@ -86,7 +95,7 @@ public class CategoryCommand implements CommandExecutor {
                 allMode.get(category),
                 "",
                 "",
-                "/deathtaunt list category " + category + " set mode",
+                "/deathtaunt modify " + category + " set mode",
                 "修改模式",
                 false
 
@@ -98,7 +107,7 @@ public class CategoryCommand implements CommandExecutor {
                 allSound.get(category),
                 "",
                 "",
-                "/deathtaunt list category " + category + " set sound",
+                "/deathtaunt modify " + category + " set sound",
                 "修改声音",
                 false
 
@@ -110,7 +119,7 @@ public class CategoryCommand implements CommandExecutor {
                 allSoundMode.get(category),
                 "",
                 "",
-                "/deathtaunt list category " + category + " set soundmode",
+                "/deathtaunt modify " + category + " set soundmode",
                 "修改声音模式",
                 false
 
@@ -124,8 +133,8 @@ public class CategoryCommand implements CommandExecutor {
                     listMsg,
                     "】",
                     "",
-                    "/deathtaunt list category " + category + " set message",
-                    "修改该消息",
+                    "",
+                    "不支持游戏内修改",
                     false
             );
         }

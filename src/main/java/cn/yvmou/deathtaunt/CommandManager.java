@@ -20,7 +20,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         registerCommands();
     }
 
-    private final Map<String, CommandExecutor> commands = new HashMap<>();
+    private final Map<String, CommandExecutor> commands = new LinkedHashMap<>();
     private final Map<String, String> commandsPerms = new HashMap<>();
     private final Map<String, Boolean> commandsDefault = new HashMap<>();
     private final Map<String, Boolean> multilevelCommands = new HashMap<>();
@@ -91,6 +91,36 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         if (args.length == 1) {
             return new ArrayList<>(commands.keySet());
         }
+
+        GetConfig getConfig = new GetConfig(pl);
+        getConfig.getAll();
+        Set<String> allCategoryList = getConfig.getAllCategoryList();
+
+        if (args[0].equals("category") && args.length == 2) {
+            List<String> sortedCommands = new ArrayList<>(allCategoryList);
+            Collections.sort(sortedCommands);
+            return sortedCommands;
+        }
+
+        if (args[0].equalsIgnoreCase("modify")) {
+            switch (args.length) {
+                case 2 -> {
+                    List<String> sortedCommands = new ArrayList<>(allCategoryList);
+                    Collections.sort(sortedCommands);//deathtaunt modify " + category + " set mode
+                    return sortedCommands;
+                }
+                case 3 -> {
+                    return List.of("set");
+                }
+                case 4 -> {
+                    return List.of("name", "change", "mode", "sound", "sound_mode");
+                }
+                case 5 -> {
+                    return List.of("§7<value>");
+                }
+            }
+        }
+
         return List.of();
     }
 }
