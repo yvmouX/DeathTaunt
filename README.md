@@ -140,5 +140,3 @@ Message:
       - "&d%killerPlayer%刚刚给你上了难忘的一课！"
 ```
 
-
-

@@ -29,8 +29,7 @@ public final class DeathTaunt extends JavaPlugin {
 
         CheckConfig.checkConfig(this);
 
-        int pluginId = 25101; // <!-- 替换为您的插件ID！ -->
-        Metrics metrics = new Metrics(this, pluginId);
+        new Metrics(this, 25101);
     }
 
 
