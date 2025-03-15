@@ -1,8 +1,9 @@
 package cn.yvmou.deathtaunt;
 
-import cn.yvmou.deathtaunt.commands.HelpCommand;
-import cn.yvmou.deathtaunt.commands.ListCommand;
-import cn.yvmou.deathtaunt.commands.ReloadCommand;
+import cn.yvmou.deathtaunt.commands.*;
+import cn.yvmou.deathtaunt.commands.menu.CategoryCommand;
+import cn.yvmou.deathtaunt.commands.menu.ListCommand;
+import cn.yvmou.deathtaunt.commands.menu.ModifyCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,10 +26,20 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     private final Map<String, Boolean> multilevelCommands = new HashMap<>();
 
     private void registerCommands() {
+        commands.put("modify", new ModifyCommand(pl));
+        commandsPerms.put("modify", "deathtaunt.modify");
+        commandsDefault.put("modify", false);
+        multilevelCommands.put("modify", true);
+
         commands.put("list", new ListCommand(pl));
         commandsPerms.put("list", "deathtaunt.list");
         commandsDefault.put("list", false);
         multilevelCommands.put("list", true); // 多级命令
+
+        commands.put("category", new CategoryCommand(pl));
+        commandsPerms.put("category", "deathtaunt.category");
+        commandsDefault.put("category", false);
+        multilevelCommands.put("category", true);
 
         commands.put("reload", new ReloadCommand(pl));
         commandsPerms.put("reload", "deathtaunt.reload");

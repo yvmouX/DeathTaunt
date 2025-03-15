@@ -1,20 +1,15 @@
 package cn.yvmou.deathtaunt;
 
+import cn.yvmou.deathtaunt.commands.GetConfig;
 import cn.yvmou.deathtaunt.listener.PlayerDeathListener;
 import cn.yvmou.deathtaunt.utils.ConfigUtils;
 import cn.yvmou.deathtaunt.utils.MessageUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
+import java.util.*;
 
 public final class DeathTaunt extends JavaPlugin {
-//    public String getVersion() {
-//        return "1.0.1";
-//    }
-//
-//    public String getPluginName() {
-//        return "§f[§bDeathTaunt§f] ";
-//    }
+
 
     @Override
     public void onEnable() {
